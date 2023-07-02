@@ -1,0 +1,26 @@
+2.1-1
+
+Input Array = {31, 41, 59, 26, 41, 58}
+
+Working for the Loop Invariants
+
+j = 1, key = 41, i = 0 and inner loop breaks, 41 is written at index 1
+
+j = 2, key = 59, i = 1 and inner loop breaks, 59 is written at index 2
+
+j = 3, key = 26, i = 2 59 is written at index 3 and i = 1
+{31, 41, 59, 59, 41, 58}
+i = 1, 41 is written at index 2, 
+i = 0, 31 is written at index 1, i = -1 inner loop breaks
+26 is written at index 0
+{26, 31, 41, 59, 41, 58}
+j = 4, key = 41, i = 3, 59 is written at index 4, 
+i = 2, inner loop breaks, 41 is written at index 3
+{26, 31, 41, 41, 59, 58}
+
+j = 5, key = 58, i = 4, 59 is written at index 5
+i = 3, inner loop breaks
+58 is written at index 4
+
+{26, 31, 41, 41, 58, 59}
+
