@@ -1,26 +1,30 @@
 package com.adeelaslam;
 
-public class InsertionSort {
+public class SelectionSort {
 
     public static void main(String[] args) {
         int[] A = {3, 7, 4, 1, 6, 7, 8, 4};
         printArray(A);
-        insertionSort(A);
+        selectionSort(A);
         printArray(A);
     }
     
-    public static void insertionSort(int[] A) {
-       int key = -1;
-       int i = -1;
-       for(int j = 1; j < A.length; j++) {
-           key = A[j];
-           i = j - 1;
-           while(i > -1 && A[i] > key) {
-               A[i+1] = A[i];
-               i = i - 1;
-           }
-           A[i+1] = key;
-       }
+    public static void selectionSort(int[] A) {
+        int smallest = -1;
+        for(int j = 0; j < A.length; j++) {
+            smallest = j;
+            for(int i = j + 1; i < A.length; i++) {
+                if(A[i] < A[smallest]) {
+                    smallest = i;
+                }
+                exchange(A, j, smallest);
+            }
+        }
+    }
+    public static void exchange(int[] A, int index1, int index2) {
+        int temp = A[index1];
+        A[index1] = A[index2];
+        A[index2] = temp;
     }
     
     public static void printArray(int [] A) {
