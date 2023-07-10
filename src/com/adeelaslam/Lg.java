@@ -2,6 +2,8 @@ package com.adeelaslam;
 
 public class Lg
 {
+    //2^k=8
+    // Lg 8=3
     public static int lg(int N)
     {
         if (N == 0)
