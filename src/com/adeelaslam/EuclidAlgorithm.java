@@ -1,11 +1,19 @@
 package com.adeelaslam;
 
+import java.util.Scanner;
+
 import com.adeelaslam.SelectionSort;
 
 public class EuclidAlgorithm {
 
     public static void main(String[] args) {
-        System.out.println("GCD of 5, 9 is " + gcd(5, 9));
+        int n1, n2;
+        System.out.print("Enter a number : " );
+        Scanner scanner = new Scanner(System.in);
+        n1 = scanner.nextInt();
+        System.out.print("Enter a number : " );
+        n2 = scanner.nextInt();
+        System.out.println("GCD of 5, 9 is " + gcd(n1, n2));
         System.out.println("GCD of 15, 90 is " + gcd(15, 90));
     }
     
