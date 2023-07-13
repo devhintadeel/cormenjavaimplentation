@@ -9,23 +9,28 @@ public class MaximumSubarray {
     public static void main(String[] args) {
         int[] nums = {3, 7, 4, 1, 6, 7, 8, 4};
         System.out.println("Maximum Subarray is ");
-//        for(int i : maximumSubArray(nums)) {
-//            System.out.print("" + i + " ");
-//        }
+        maximumSubArray(nums, 0, 7);
+        for(int i = low; i <= hi; i++) {
+            System.out.print("" + nums[i] + " ");
+        }
 
     }
-    public static int[] maximumSubArray(int[] array, int beginIndex, int endIndex) {
+    public static void maximumSubArray(int[] array, int beginIndex, int endIndex) {
         int stepSum = 0;
-        for(int i = beginIndex; i <= endIndex; i++) {
-            stepSum += i;
+        if(beginIndex < endIndex) {
+            for(int i = beginIndex; i <= endIndex; i++) {
+                stepSum += array[i];
+            }
+            if(stepSum > max) {
+                low = beginIndex;
+                hi = endIndex;
+                max = stepSum;
+            }
+            if(beginIndex + 1 != endIndex)
+                maximumSubArray(array, beginIndex + 1, endIndex);
+            if(endIndex - 1 != beginIndex)  
+                maximumSubArray(array, beginIndex, endIndex - 1);
         }
-        if(stepSum > max) {
-            max = stepSum;
-            low = beginIndex;
-            hi = endIndex;
-        }
-        int[] result = new int[array.length];
-        return result;
     }
 
 }
