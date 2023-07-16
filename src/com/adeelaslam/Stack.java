@@ -2,8 +2,8 @@ package com.adeelaslam;
 
 public class Stack {
 
-    private Stack top;
-    
+    private int[] array = new int[8];
+    int top = 0;
     
     private int data;
     public int getData() {
@@ -15,18 +15,13 @@ public class Stack {
         this.data = data;
     }
     
-    public void push(int data) {
-        Stack node = new Stack();
-        node.setData(data);
-        if(top == null) {
-            top = node;
-        }else {
-            
-        }
+    public void push(int x) {
+        top = top + 1;
+        array[top] = x;
     }
     
     public boolean isEmpty() {
-        if(top == null) {
+        if(top == 0) {
             return true;
         }else {
             return false;
@@ -36,6 +31,9 @@ public class Stack {
     public static void main(String[] args) {
         Stack objStack = new Stack();
         System.out.println("Is the stack empty " + objStack.isEmpty());
+        objStack.push(3);
+        System.out.println("Is the stack empty " + objStack.isEmpty());
+        objStack.isEmpty();
     }
 
 }
