@@ -18,6 +18,8 @@ public class CircularRotation {
     }
 
     public static void main(String[] args) {
+        // This algorithm is not complete, some more fixes can be added to it such that it cannot be cheated. 
+        
         System.out.println("Circular shift of both empty strings " + isCircularRotation("", ""));
         System.out.println("Circular shift of first empty strings " + isCircularRotation("", "sas"));
         System.out.println("Circular shift of second empty strings " + isCircularRotation("adf", ""));
