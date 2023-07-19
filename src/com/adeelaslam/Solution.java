@@ -232,7 +232,133 @@ public class Solution {
 		System.out.println("Test case 5 for Single Ended Linked List");
 		MyLinkedList testcase5LinkedList = new MyLinkedList();
 		testcase5LinkedList.addAtTail(1);
-		testcase5LinkedList.get(0);
+		System.out.println("Get index 0 results " + testcase5LinkedList.get(0));
+		testcase5LinkedList.traverse();
+		
+		System.out.println("Test case 6 for Single Ended Linked List");
+		MyLinkedList obj = new MyLinkedList();
+		obj.addAtHead(2);
+		obj.deleteAtIndex(1);
+		obj.addAtHead(2);
+		obj.addAtHead(7);
+		obj.addAtHead(3);
+        obj.addAtHead(2);
+        obj.addAtHead(5);
+        obj.addAtTail(5);
+        System.out.println("Element at index 5 is " + obj.get(5));
+        obj.deleteAtIndex(6);
+        obj.deleteAtIndex(4);
+        obj.traverse();
+		
+        System.out.println("Test case 7 for Single Ended Linked List");
+        MyLinkedList obj1 = new MyLinkedList();
+        obj1.addAtHead(4);
+        System.out.println("Element at index 1 is " + obj1.get(1));
+        obj1.addAtHead(1);
+        obj1.addAtHead(5);
+        obj1.deleteAtIndex(3);
+        obj1.addAtHead(7);
+        System.out.println("Element at index 3 is " + obj1.get(3));
+        System.out.println("Element at index 3 is " + obj1.get(3));
+        System.out.println("Element at index 3 is " + obj1.get(3));
+        obj1.addAtHead(1);
+        obj1.deleteAtIndex(4);
+        obj1.traverse();
+        
+        System.out.println("Executing Test case 8");
+        MyLinkedList obj2 = new MyLinkedList();
+        obj2.addAtHead(1);
+        obj2.addAtTail(3);
+        obj2.addAtIndex(1, 2);
+        System.out.println("Element at index 1 is " + obj2.get(1));
+        obj2.deleteAtIndex(1);
+        System.out.println("Element at index 1 is " + obj2.get(1));
+        System.out.println("Element at index 3 is " + obj2.get(3));
+        obj2.deleteAtIndex(3);
+        obj2.deleteAtIndex(0);
+        System.out.println("Element at index 0 is " + obj2.get(0));
+        obj2.deleteAtIndex(0);
+        System.out.println("Element at index 0 is " + obj2.get(0));
+        
+        MyLinkedList obj3 = new MyLinkedList();
+        obj3.addAtHead(1);
+        obj3.addAtTail(3);
+        obj3.addAtIndex(3, 2);
+        
+        MyLinkedList middleNodeLinkedList = new MyLinkedList();
+        middleNodeLinkedList.addAtHead(1);
+        middleNodeLinkedList.addAtTail(2);
+        middleNodeLinkedList.addAtTail(3);
+        middleNodeLinkedList.addAtTail(4);
+        middleNodeLinkedList.addAtTail(5);
+        
+        System.out.println("Middle Node function called");
+        ListNode node = objSolution.middleNode(middleNodeLinkedList.head);
+		middleNodeLinkedList.head = node;
+		middleNodeLinkedList.traverse();
+		
+        MyLinkedList middleNodeLinkedList1 = new MyLinkedList();
+        middleNodeLinkedList1.addAtHead(1);
+        middleNodeLinkedList1.addAtTail(2);
+        middleNodeLinkedList1.addAtTail(3);
+        middleNodeLinkedList1.addAtTail(4);
+        middleNodeLinkedList1.addAtTail(5);
+        middleNodeLinkedList1.addAtTail(6);
+        
+        System.out.println("Middle Node function called");
+        ListNode node1 = objSolution.middleNode(middleNodeLinkedList1.head);
+        middleNodeLinkedList1.head = node1;
+        middleNodeLinkedList1.traverse();
+        
+        MyLinkedList obj4 = new MyLinkedList();
+        obj4.addAtHead(1);
+        
+        System.out.println("Middle Node function called");
+        ListNode node4 = objSolution.middleNode(obj4.head);
+        obj4.head = node4;
+        obj4.traverse();
+        
+        System.out.println("Executing the test cases of HashSet");
+        
+        MyHashSet obj5 = new MyHashSet();
+        obj5.add(1);
+        obj5.add(2);
+        if(obj5.contains(1)) {
+            System.out.println("Value 1 exists");
+        }else {
+            System.out.println("Value 1 does not exist");
+        }
+        if(obj5.contains(3)) {
+            System.out.println("Value 3 exists");
+        }else {
+            System.out.println("Value 3 does not exist");
+        }
+        obj5.add(2);
+        if(obj5.contains(2)) {
+            System.out.println("Value 2 exists");
+        }else {
+            System.out.println("Value 2 does not exist");
+        }
+
+        obj5.remove(2);
+        if(obj5.contains(2)) {
+            System.out.println("Value 2 exists");
+        }else {
+            System.out.println("Value 2 does not exist");
+        }
+        
+        System.out.println("Executing the test cases of HashMap");
+        
+        MyHashMap obj6 = new MyHashMap();
+        obj6.put(1,1);
+        obj6.put(2,2);
+        System.out.println("Value at key 1 " +  obj6.get(1));
+        System.out.println("Value at key 3 " +  obj6.get(3));
+        obj6.put(2,1);
+        System.out.println("Value at key 2 " +  obj6.get(2));
+
+        obj6.remove(2);
+        System.out.println("Value at key 2 " +  obj6.get(2));
 	}
 
 	public static int[] twoSum(int[] nums, int target) {
@@ -961,19 +1087,23 @@ public class Solution {
     		traverse = traverse.next;
     	}
     	if(count % 2 == 0) {
-    		middle = (count / 2) + 1; 
+    		middle = (count / 2); 
     	} else {
     		middle = (int)Math.floor(count / 2);
     	}
-    	count = 0;
-    	while(head != null) {
-    		count++;
-    		if(count == middle) {
-    			return head;
+    	int index = 0;
+    	traverse = head;
+    	while(traverse != null) {
+    	    if(count == 1) {
+    	        return traverse;
+    	    }
+    		index++;
+            traverse = traverse.next;
+    		if(index == middle) {
+    			return traverse;
     		}
-    		head = head.next;
     	}
-    	return head;
+    	return traverse;
     }
     
     public int findMiddleIndex(int[] nums) {

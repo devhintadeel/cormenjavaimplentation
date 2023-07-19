@@ -15,6 +15,9 @@ class MyLinkedList {
         	currentIndex++;
         	current = current.next;
         }
+        if(current == null) {
+            return -1;
+        }
         return current.val;
     }
     
@@ -24,6 +27,11 @@ class MyLinkedList {
     }
     
     public void addAtTail(int val) {
+        if(head == null) {
+            ListNode myNode = new ListNode(val);
+            head = myNode;
+            return;
+        }
     	ListNode current = head;
     	while(current.next != null) {
     		current = current.next;
@@ -50,6 +58,8 @@ class MyLinkedList {
     		current = current.next;
     		currentIndex++;
     	}
+    	if(current == null)
+    	    return;
     	ListNode newNode = new ListNode(val, current.next);
     	current.next = newNode;
     }
@@ -67,6 +77,11 @@ class MyLinkedList {
 
     		current = current.next;
     		currentIndex++;
+    	}
+    	if(current == null)
+    	    return;
+    	if(current.next == null) {
+    	    return;
     	}
     	current.next = current.next.next;
     }
