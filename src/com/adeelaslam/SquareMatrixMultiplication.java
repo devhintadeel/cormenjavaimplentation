@@ -1,9 +1,18 @@
 package com.adeelaslam;
 
+import java.util.Arrays;
+
 public class SquareMatrixMultiplication {
 
     public static void main(String[] args) {
-        // TODO Auto-generated method stub
+        int [][] A = {{1, 2}, {3, 4}};
+        int [][] B = {{5, 6}, {7, 8}};
+        
+        int [][] C = squareMatrixMultiply(A, B);
+        
+        for(int i = 0; i < A.length; i++) {
+            System.out.println("Row " + (i + 1) + " is " + Arrays.toString(C[i]));
+        }
 
     }
     
