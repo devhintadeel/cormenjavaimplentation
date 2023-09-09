@@ -5,8 +5,8 @@ import java.util.Arrays;
 public class SquareMatrixMultiplication {
 
     public static void main(String[] args) {
-        int[][] A = { { 1, 2 }, { 3, 4 } };
-        int[][] B = { { 5, 6 }, { 7, 8 } };
+        int[][] A = { { 1, 3 }, { 6, 8 } };
+        int[][] B = { { 7, 5 }, { 4, 2 } };
 
         int[][] C = squareMatrixMultiplyRecursive(A, B);
         
@@ -49,32 +49,32 @@ public class SquareMatrixMultiplication {
     }
 
     
-    public static void strassenMatrixChainMultiplicationJoin(int[][] C, int[][] P, int iB, int jB)
+    public static void strassenMatrixChainMultiplicationJoin(int[][] matrixToSplit, int[][] matrixToPopulateAfterCombine, int iB, int jB)
     {
         for (
-                int i1 = 0, i2 = iB; i1 < C.length; i1++, i2++
+                int i1 = 0, i2 = iB; i1 < matrixToSplit.length; i1++, i2++
         ) {
 
             for (
-                    int j1 = 0, j2 = jB; j1 < C.length; j1++, j2++
+                    int j1 = 0, j2 = jB; j1 < matrixToSplit.length; j1++, j2++
             ) {
 
-                P[i2][j2] = C[i1][j1];
+                matrixToPopulateAfterCombine[i2][j2] = matrixToSplit[i1][j1];
             }
         }
     }
 
-    public static void strassenMatrixChainMultiplicationSplit(int[][] P, int[][] C, int iB, int jB) {
+    public static void strassenMatrixChainMultiplicationSplit(int[][] matrixToSplit, int[][] matrixToPopulateAfterSplit, int rowIndex, int columnIndex) {
 
         for (
-                int i1 = 0, i2 = iB; i1 < C.length; i1++, i2++
+                int rowLoopInvariant = 0, i2 = rowIndex; rowLoopInvariant < matrixToPopulateAfterSplit.length; rowLoopInvariant++, i2++
         )
 
             for (
-                    int j1 = 0, j2 = jB; j1 < C.length; j1++, j2++
+                    int columnLoopInvariant = 0, j2 = columnIndex; columnLoopInvariant < matrixToPopulateAfterSplit.length; columnLoopInvariant++, j2++
             )
 
-                C[i1][j1] = P[i2][j2];
+                matrixToPopulateAfterSplit[rowLoopInvariant][columnLoopInvariant] = matrixToSplit[i2][j2];
     }
 
     public static int[][] squareMatricesSubtraction(int[][] A, int[][] B) {
@@ -110,36 +110,36 @@ public class SquareMatrixMultiplication {
         return C;
     }
 
-    public static int[][] squareMatrixMultiplyRecursive(int[][] A, int[][] B) {
-        int n = A.length;
+    public static int[][] squareMatrixMultiplyRecursive(int[][] operand1Matrix, int[][] operand2Matrix) {
+        int squareMatrixSize = operand1Matrix.length;
 
-        int[][] R = new int[n][n];
+        int[][] resultMatrix = new int[squareMatrixSize][squareMatrixSize];
 
         if (
-            n == 1
+            squareMatrixSize == 1
         ) {
-            R[0][0] = A[0][0] * B[0][0];
+            resultMatrix[0][0] = operand1Matrix[0][0] * operand2Matrix[0][0];
         } else {
-            int[][] A11 = new int[n / 2][n / 2];
-            int[][] A12 = new int[n / 2][n / 2];
-            int[][] A21 = new int[n / 2][n / 2];
-            int[][] A22 = new int[n / 2][n / 2];
-            int[][] B11 = new int[n / 2][n / 2];
-            int[][] B12 = new int[n / 2][n / 2];
-            int[][] B21 = new int[n / 2][n / 2];
-            int[][] B22 = new int[n / 2][n / 2];
+            int[][] A11 = new int[squareMatrixSize / 2][squareMatrixSize / 2];
+            int[][] A12 = new int[squareMatrixSize / 2][squareMatrixSize / 2];
+            int[][] A21 = new int[squareMatrixSize / 2][squareMatrixSize / 2];
+            int[][] A22 = new int[squareMatrixSize / 2][squareMatrixSize / 2];
+            int[][] B11 = new int[squareMatrixSize / 2][squareMatrixSize / 2];
+            int[][] B12 = new int[squareMatrixSize / 2][squareMatrixSize / 2];
+            int[][] B21 = new int[squareMatrixSize / 2][squareMatrixSize / 2];
+            int[][] B22 = new int[squareMatrixSize / 2][squareMatrixSize / 2];
 
             // Step 2: Dividing matrix A into 4 halves
-            strassenMatrixChainMultiplicationSplit(A, A11, 0, 0);
-            strassenMatrixChainMultiplicationSplit(A, A12, 0, n / 2);
-            strassenMatrixChainMultiplicationSplit(A, A21, n / 2, 0);
-            strassenMatrixChainMultiplicationSplit(A, A22, n / 2, n / 2);
+            strassenMatrixChainMultiplicationSplit(operand1Matrix, A11, 0, 0);
+            strassenMatrixChainMultiplicationSplit(operand1Matrix, A12, 0, squareMatrixSize / 2);
+            strassenMatrixChainMultiplicationSplit(operand1Matrix, A21, squareMatrixSize / 2, 0);
+            strassenMatrixChainMultiplicationSplit(operand1Matrix, A22, squareMatrixSize / 2, squareMatrixSize / 2);
 
             // Step 2: Dividing matrix B into 4 halves
-            strassenMatrixChainMultiplicationSplit(B, B11, 0, 0);
-            strassenMatrixChainMultiplicationSplit(B, B12, 0, n / 2);
-            strassenMatrixChainMultiplicationSplit(B, B21, n / 2, 0);
-            strassenMatrixChainMultiplicationSplit(B, B22, n / 2, n / 2);
+            strassenMatrixChainMultiplicationSplit(operand2Matrix, B11, 0, 0);
+            strassenMatrixChainMultiplicationSplit(operand2Matrix, B12, 0, squareMatrixSize / 2);
+            strassenMatrixChainMultiplicationSplit(operand2Matrix, B21, squareMatrixSize / 2, 0);
+            strassenMatrixChainMultiplicationSplit(operand2Matrix, B22, squareMatrixSize / 2, squareMatrixSize / 2);
 
             int[][] M1 = squareMatrixMultiplyRecursive(squareMatricesAddition(A11, A22), squareMatricesAddition(B11, B22));
 
@@ -164,13 +164,13 @@ public class SquareMatrixMultiplication {
             int[][] C22 = squareMatricesAddition(squareMatricesSubtraction(squareMatricesAddition(M1, M3), M2), M6);
 
             // Step 3: Join 4 halves into one result matrix
-            strassenMatrixChainMultiplicationJoin(C11, R, 0, 0);
-            strassenMatrixChainMultiplicationJoin(C12, R, 0, n / 2);
-            strassenMatrixChainMultiplicationJoin(C21, R, n / 2, 0);
-            strassenMatrixChainMultiplicationJoin(C22, R, n / 2, n / 2);
+            strassenMatrixChainMultiplicationJoin(C11, resultMatrix, 0, 0);
+            strassenMatrixChainMultiplicationJoin(C12, resultMatrix, 0, squareMatrixSize / 2);
+            strassenMatrixChainMultiplicationJoin(C21, resultMatrix, squareMatrixSize / 2, 0);
+            strassenMatrixChainMultiplicationJoin(C22, resultMatrix, squareMatrixSize / 2, squareMatrixSize / 2);
         }
 
-        return R;
+        return resultMatrix;
     }
 
 }
