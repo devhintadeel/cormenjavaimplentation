@@ -25,6 +25,10 @@ class SedgewickStackTest {
         assertEquals("((12+)((34-)(56-)*)*)", objSolution.infixToPostfix("((1+2)*((3-4)*(5-6)))"));
     }
     
-   
+    @Test
+    void testEvaluatePostfix() {
+        assert objSolution.evaluatePostfix("((12+)((34-)(56-)*)*)") == 3;
+    }
+    
 
 }

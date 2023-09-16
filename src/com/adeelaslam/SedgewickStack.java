@@ -94,4 +94,52 @@ public class SedgewickStack {
         }
         return operandStack.firstElement();
     }
+    
+    public int evaluatePostfix(String postfix) {
+        Stack<Integer> operandStack = new Stack<>();
+        Stack<Character> operatorStack = new Stack<>();
+        Stack<Character> bracketStack = new Stack<>();
+        int lhs;
+        int rhs;
+        char operator;
+        for(char c : postfix.toCharArray()) {
+            if(c == '(') {
+                bracketStack.push('(');
+            }else {
+                if(Character.isDigit(c)) {
+                    operandStack.push(Integer.parseInt(String.valueOf(c)));
+                }else {
+                    if(c == '+' || c == '-' || c == '*' || c == '/') {
+                        operatorStack.push(c);
+                    }
+                    else {
+                        if(c == ')') {
+                            rhs = operandStack.pop();
+                            lhs = operandStack.pop();
+                            operator = operatorStack.pop();
+                            bracketStack.pop();
+                            
+                            if(operator == '+') {
+                                operandStack.push(lhs + rhs);
+                            }else {
+                                if(operator == '-') {
+                                    operandStack.push(lhs - rhs);
+                                }else {
+                                    if(operator == '*') {
+                                        operandStack.push(lhs * rhs);
+                                    }else {
+                                        if(operator == '/') {
+                                            operandStack.push(lhs / rhs);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return operandStack.firstElement();
+    }
+
 }
