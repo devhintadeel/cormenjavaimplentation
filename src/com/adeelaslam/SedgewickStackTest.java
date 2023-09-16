@@ -14,5 +14,17 @@ class SedgewickStackTest {
     void testCheckParenthesis1() {
         assert objSolution.checkParenthesis("[(])") == false;
     }
+    
+    @Test
+    void testInsertInfixMissingParentheses() {
+        assertEquals("((1+2)*((3-4)*(5-6)))", objSolution.insertInfixMissingParentheses("1+2)*3-4)*5-6)))"));
+    }
+    
+    @Test
+    void testInfixToPostfix() {
+        assertEquals("((12+)((34-)(56-)*)*)", objSolution.infixToPostfix("((1+2)*((3-4)*(5-6)))"));
+    }
+    
+   
 
 }
